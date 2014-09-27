@@ -5,6 +5,7 @@ import urllib2
 import cv2
 import numpy as np
 import getch
+import time
 
 """
 Examples of objects for image frame aquisition from both IP and
@@ -51,39 +52,78 @@ while (True):
           "Press i to move up the Foscam\n" \
           "Press k to move down the Foscam\n" \
           "Press l to move left the Foscam\n" \
-          "Press j to move right the Foscam\n"
+          "Press j to move right the Foscam\n" \
+          "Press c to center the Foscam"
     char = getch.getche()
 
     if char=='s':
         url = "http://192.168.10.222:1201/snapshot.cgi?user=admin&pwd="
         print '\n'+url
-        """
+
         cam = ipCamera(url)
         frame = cam.get_frame()
         cv2.imshow('image',frame)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-        """
+
     elif char == 'i':
+        url = "http://192.168.10.222:1201/decoder_control.cgi?command=0&user=admin&pwd="
+        print '\n'+url
+        req = urllib2.Request(url)
+        response = urllib2.urlopen(req)
+        print response.read()
+        time.sleep(0.50)
         url = "http://192.168.10.222:1201/decoder_control.cgi?command=1&user=admin&pwd="
         print '\n'+url
         req = urllib2.Request(url)
-        print req
+        response = urllib2.urlopen(req)
+        print response.read()
     elif char == 'k':
+        url = "http://192.168.10.222:1201/decoder_control.cgi?command=2&user=admin&pwd="
+        print '\n'+url
+        req = urllib2.Request(url)
+        response = urllib2.urlopen(req)
+        print response.read()
+        time.sleep(0.50)
         url = "http://192.168.10.222:1201/decoder_control.cgi?command=3&user=admin&pwd="
         print '\n'+url
         req = urllib2.Request(url)
-        print req
+        response = urllib2.urlopen(req)
+        print response.read()
+
     elif char == 'l':
+        url = "http://192.168.10.222:1201/decoder_control.cgi?command=4&user=admin&pwd="
+        print '\n'+url
+        req = urllib2.Request(url)
+        response = urllib2.urlopen(req)
+        time.sleep(0.50)
+        print response.read()
         url = "http://192.168.10.222:1201/decoder_control.cgi?command=5&user=admin&pwd="
         print '\n'+url
         req = urllib2.Request(url)
-        print req
+        response = urllib2.urlopen(req)
+        print response.read()
+
     elif char == 'j':
+        url = "http://192.168.10.222:1201/decoder_control.cgi?command=6&user=admin&pwd="
+        print '\n'+url
+        req = urllib2.Request(url)
+        response = urllib2.urlopen(req)
+        time.sleep(0.50)
+        print response.read()
         url = "http://192.168.10.222:1201/decoder_control.cgi?command=7&user=admin&pwd="
         print '\n'+url
         req = urllib2.Request(url)
-        print req
+        response = urllib2.urlopen(req)
+        print response.read()
+    elif char == 'c':
+        url = "http://192.168.10.222:1201/decoder_control.cgi?command=25&user=admin&pwd="
+        print '\n'+url
+        req = urllib2.Request(url)
+        response = urllib2.urlopen(req)
+        print response.read()
+        time.sleep(2)
+
     else:
         print "Bad Usage, try again..\n"
 
